@@ -1,0 +1,20 @@
+<phpunit
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        stopOnRisky="false"
+>
+    <testsuites>
+        <testsuite name="Default">
+            <file>tests/OptionTest.php</file>
+            <file>tests/StepTest.php</file>
+
+           <!--<file>tests/IServConfiguratorTest.php</file>-->
+        </testsuite>
+    </testsuites>
+</phpunit>

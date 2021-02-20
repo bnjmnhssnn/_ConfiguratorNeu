@@ -1,0 +1,19 @@
+{% block step_main_product %}
+    <div 
+        class="configurator-step-wrapper">
+        <form 
+            class="configurator-step-form"
+            method="post"
+            action="{{ configurator.form_target }}">
+            <input type="hidden" name="step_id" value="{{ step.id }}">
+            <h5>{{ configurator.title }}</h5>
+            <p>{{ configurator.paragraph }}</p>
+            <fieldset>
+                <table class="configurator-choice-table">
+                </table>
+            </fieldset>
+            <button type="button" class="configurator-step-btn back-btn">Zurück</button>
+            <button type="button" class="configurator-step-btn confirm-btn">Bestätigen</button>
+        </form>
+    </div>
+{% endblock %}

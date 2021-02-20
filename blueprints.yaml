@@ -1,0 +1,61 @@
+name: I Serv Configurator
+slug: i-serv-configurator
+type: plugin
+version: 0.1.0
+description: IServ Produktkonfigurator
+icon: plug
+author:
+  name: Benjamin Hosseinian
+  email: info@benjamin-hosseinian.de
+homepage: https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator
+demo: http://demo.yoursite.com
+keywords: grav, plugin, etc
+bugs: https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator/issues
+docs: https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.6.0' }
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    configurator_form_target:
+        type: text
+        label: Zielpfad für Formulare
+        default: 'configurator/submit'
+        
+    step_school_info_title:
+      type: text
+      label: Schritt 1 Schulinfos Titel
+      default: 'Schultyp & Schüleranzahl'
+    step_school_info_paragraph:
+      type: text
+      label: Schritt 1 Schulinfos Text
+      default: 'Lorem ipsum'
+
+    step_main_product_title:
+      type: text
+      label: Schritt 2 Produktauswahl Titel
+      default: 'Passende IServ Lösungen für Ihre Schule'
+    step_main_product_paragraph:
+      type: text
+      label: Schritt 2 Produktauswahl Text
+      default: 'Lorem ipsum'
+      
+
+
+          
+      
+            
+
