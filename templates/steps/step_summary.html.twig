@@ -1,0 +1,16 @@
+{% block step_summary %}
+    <div 
+        class="configurator-step-wrapper">
+        <form 
+            class="configurator-step-form"
+            method="post"
+            action="{{ configurator.post_route }}">
+            <input type="hidden" name="step_id" value="{{ configurator.step_id }}">
+            <h5>{{ configurator.title }}</h5>
+            <p>{{ configurator.paragraph }}</p>
+            {{ configurator.summary_table_l }}
+            <input type="submit" name="action_back" value="Zurück" />
+            <input type="submit" name="action_confirm" value="Anfrage senden" />
+        </form>
+    </div>
+{% endblock %}

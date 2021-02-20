@@ -67,7 +67,7 @@ class IServConfiguratorPlugin extends Plugin
                         exit;
 
                     } else {
-                        echo 'Fehler';
+                        echo $configurator->error;
                         exit;
                     }
                 } elseif (isset($_POST['action_back'])) {

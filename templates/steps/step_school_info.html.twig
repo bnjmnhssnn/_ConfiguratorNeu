@@ -5,12 +5,28 @@
             class="configurator-step-form"
             method="post"
             action="{{ configurator.post_route }}">
-            <input type="hidden" name="step_id" value="{{ step.id }}">
+            <input type="hidden" name="step_id" value="{{ configurator.step_id }}">
             <h5>{{ configurator.title }}</h5>
             <p>{{ configurator.paragraph }}</p>
             <fieldset>
+                {{ configurator.input_schooltype.title }}
                 <table class="configurator-choice-table">
+                {% for option in configurator.input_schooltype.options %} 
+                    <tr>
+                        <td class="input-cell">
+                            <input 
+                                type="radio" 
+                                name="schooltype" 
+                                value="{{option.id}}">
+                        </td>
+                        <td class="name-cell">{{ option.name }}</td>
+                        <td class="name-price-info">{{ option.price_info }}</td>
+                        <td class="name-price">{{ option.price }} €</td>
+                    </tr>
+                {% endfor %}
                 </table>
+                {{ configurator.input_student_count.title }}
+                <input type="number" name="student_count">
             </fieldset>
             <input type="submit" name="action_confirm" value="Bestätigen" />
         </form>

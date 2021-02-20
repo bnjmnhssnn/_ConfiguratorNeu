@@ -1,0 +1,44 @@
+{% block step_backup %}
+    <div 
+        class="configurator-step-wrapper">
+        <form 
+            class="configurator-step-form"
+            method="post"
+            action="{{ configurator.post_route }}">
+            <input type="hidden" name="step_id" value="{{ configurator.step_id }}">
+            <h5>{{ configurator.title }}</h5>
+            <p>{{ configurator.paragraph }}</p>
+            <fieldset>
+                {{ configurator.input_backup.title }}
+                <table class="configurator-choice-table">
+                    {% if configurator.input_backup_hardware %}
+                        <tr>
+                            <td class="input-cell">
+                                <input 
+                                    type="radio" 
+                                    name="backup" 
+                                    value="{{configurator.input_backup_hardware.id}}">
+                            </td>
+                            <td class="name-cell">{{ configurator.input_backup_hardware.name }}</td>
+                            <td class="name-price-info">{{ configurator.input_backup_hardware.price_info }}</td>
+                            <td class="name-price">{{ configurator.input_backup_hardware.price }} €</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="input-cell">
+                            <input 
+                                type="radio" 
+                                name="backup" 
+                                value="{{configurator.input_backup_cloud.id}}">
+                        </td>
+                        <td class="name-cell">{{ configurator.input_backup_cloud.name }}</td>
+                        <td class="name-price-info"></td>
+                        <td class="name-price"></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <input type="submit" name="action_back" value="Zurück" />
+            <input type="submit" name="action_confirm" value="Bestätigen" />
+        </form>
+    </div>
+{% endblock %}

@@ -7,16 +7,16 @@ icon: plug
 author:
   name: Benjamin Hosseinian
   email: info@benjamin-hosseinian.de
-homepage: https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator
-demo: http://demo.yoursite.com
-keywords: grav, plugin, etc
-bugs: https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator/issues
-docs: https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator/blob/develop/README.md
+homepage: 'https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator'
+demo: 'http://demo.yoursite.com'
+keywords: 'grav, plugin, etc'
+bugs: 'https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator/issues'
+docs: >-
+  https://github.com/bnjmnhssnn/grav-plugin-i-serv-configurator/blob/develop/README.md
 license: MIT
-
 dependencies:
-  - { name: grav, version: '>=1.6.0' }
-
+  - name: grav
+    version: '>=1.6.0'
 form:
   validation: loose
   fields:
@@ -26,45 +26,201 @@ form:
       highlight: 1
       default: 0
       options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
+        '0': PLUGIN_ADMIN.DISABLED
+        '1': PLUGIN_ADMIN.ENABLED
       validate:
         type: bool
-
     main_route:
-        type: text
-        label: Haupt-Pfad für Konfigurator
-        default: 'configurator'
+      type: text
+      label: Haupt-Pfad für Konfigurator
+      default: configurator
     post_route:
-        type: text
-        label: Pfad für Formulare
-        default: 'configurator/submit'
+      type: text
+      label: Pfad für Formulare
+      default: configurator/submit
     success_route:
-        type: text
-        label: Pfad für Success Page
-        default: 'configurator/success'
-        
-    step_school_info_title:
       type: text
-      label: Schritt 1 Schulinfos Titel
-      default: 'Schultyp & Schüleranzahl'
-    step_school_info_paragraph:
-      type: text
-      label: Schritt 1 Schulinfos Text
-      default: 'Lorem ipsum'
-
-    step_main_product_title:
-      type: text
-      label: Schritt 2 Produktauswahl Titel
-      default: 'Passende IServ Lösungen für Ihre Schule'
-    step_main_product_paragraph:
-      type: text
-      label: Schritt 2 Produktauswahl Text
-      default: 'Lorem ipsum'
-      
-
-
-          
-      
-            
-
+      label: Pfad für Success Page
+      default: configurator/success
+    admin_tabs:
+      type: tabs
+      fields:
+        step_1_tab:
+          type: tab
+          title: 1. Schulinfos
+          fields:
+            step_school_info_title:
+              type: text
+              label: Titel
+              default: Schultyp & Schüleranzahl
+            step_school_info_paragraph:
+              type: text
+              label: Text
+              default: Lorem ipsum
+            step_school_info_options:
+              type: editor
+              validate:
+                type: yaml
+              label: Optionen
+              default: |
+                -
+                  id: 1
+                  name: Grund- oder Förderschule
+                  summary_name: jährl. pro-Kopf-Gebühr für Grund- und Förderschulen
+                  price: 
+                    value: 4
+                    class: 3
+                    info: pro SchülerIn und Jahr
+                - 
+                  id: 2
+                  name: Weiterführende Schule
+                  summary_name: jährl. pro-Kopf-Gebühr für weiterführenden Schulen
+                  price: 
+                    value: 5
+                    class: 3
+                    info: pro SchülerIn und Jahr
+                -
+                  id: 3
+                  name: Berufsschule
+                  summary_name: jährl. pro-Kopf-Gebühr für Berufsschulen
+                  price: 
+                    value: 6
+                    class: 3
+                    info: pro SchülerIn und Jahr
+        step_2_tab:
+          type: tab
+          title: 2. Hauptprodukt
+          fields:
+            step_main_product_title:
+              type: text
+              label: Titel
+              default: Passende IServ Lösungen für Ihre Schule
+            step_main_product_paragraph:
+              type: text
+              label: Text
+              default: Lorem ipsum
+            step_main_product_options:
+              type: editor
+              validate:
+                type: yaml
+              label: Artikel
+              default: |
+                -
+                  id: 4
+                  name: Portal-M
+                  summary_name: Server-Hardware Portal-M
+                  price: 
+                    value: 4595
+                    class: 1
+                    info: einmalig
+                -
+                  id: 5
+                  name: Portal-L
+                  summary_name: Server-Hardware Portal-L
+                  price: 
+                    value: 6595
+                    class: 1
+                    info: einmalig
+                -
+                  id: 6
+                  name: Portal-XL
+                  summary_name: Server-Hardware Portal-XL
+                  price: 
+                    value: 11595
+                    class: 1
+                    info: einmalig
+                -
+                  id: 7
+                  name: Hosting-M
+                  summary_name: CloudIServ Hosting-M
+                  price: 
+                    value: 250
+                    class: 2
+                    info: jährlich
+                -
+                  id: 8
+                  name: Hosting-L
+                  summary_name: CloudIServ Hosting-L
+                  price: 
+                    value: 450
+                    class: 2
+                    info: jährlich
+                -
+                  id: 9
+                  name: Hosting-XL
+                  summary_name: CloudIServ Hosting-XL
+                  price: 
+                    value: 800
+                    class: 2
+                    info: jährlich
+        step_3_tab:
+          type: tab
+          title: 3. Backup
+          fields:
+            step_backup_title:
+              type: text
+              label: Titel
+              default: Passende Backup Lösungen
+            step_backup_paragraph:
+              type: text
+              label: Text
+              default: Lorem ipsum
+            step_backup_options:
+              type: editor
+              validate:
+                type: yaml
+              label: Artikel
+              default: |
+                -
+                  id: 10
+                  name: Backup-L
+                  summary_name: Backup-Hardware Backup-L
+                  price: 
+                    value: 995
+                    class: 1
+                    info: einmalig
+                -
+                  id: 11
+                  name: Backup-XL
+                  summary_name: Backup-Hardware Backup-XL
+                  price: 
+                    value: 1395
+                    class: 1
+                    info: einmalig
+                - 
+                  id: 12
+                  name: Cloud-Backup
+                  summary_name: Einrichtung Cloud-Backup
+                  price: 
+                    -
+                      value: 200
+                      price_class: 1
+                      price_info: einmalige Einrichtungspauschale
+                    -
+                      value: 150
+                      price_class: 2
+                      price_info: jährlich
+                      requires:
+                        - 
+                          1
+                        - 
+                          2
+                    -
+                      value: 250
+                      price_class: 2
+                      price_info: jährlich
+                      requires:
+                        - 
+                          3
+        step_4_tab:
+          type: tab
+          title: 4. Zusammenfassung
+          fields:
+            step_backup_title:
+              type: text
+              label: Titel
+              default: Zusammenfassung & Bestätigung
+            step_backup_paragraph:
+              type: text
+              label: Text
+              default: Lorem ipsum

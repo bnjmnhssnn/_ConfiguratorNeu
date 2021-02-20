@@ -5,50 +5,50 @@ class Configurator
 {
     protected $steps;
     protected $current = 0;
+    protected $selection = [];
     protected $config = NULL;
 
     public function __construct(array $plugin_config, array $state_from_session = NULL)
     {
-        if(!empty($state_from_session)) {
-            $this->current = $state_from_session['current'];
-        }
-
-        $this->registerSteps([
-            new Step\SchoolInfo($plugin_config),
-            new Step\MainProduct($plugin_config)
-        ]);
+        $this->current = $state_from_session['current'] ?? 0;
+        $this->selection = $state_from_session['selection'] ?? [];
+    
+        $this->steps = [
+            new Step\SchoolInfo(0),
+            new Step\MainProduct(1),
+            new Step\Backup(2),
+            new Step\Summary(3)
+        ];
 
         $this->config = $plugin_config;
-    }
-
-    protected function registerSteps(array $steps)
-    {
-        foreach($steps as $step) {
-            $this->steps[] = $step;
-        }
     }
 
     public function outputCurrent()
     {
         $current_step = $this->steps[$this->current];
-        return [
-            'template' => $current_step->template,
-            'post_route' => $this->config['post_route'],
-            'title' => $current_step->title,
-            'paragraph' => $current_step->paragraph
-        ];
+        $current_step->setup($this->config, $this->selection);
+        $vars = $current_step->getVars();
+        $vars['post_route'] = $this->config['post_route'];
+        $vars['selection'] = print_r($this->selection, true);
+        return $vars;
     }
 
     public function confirmCurrentStep(array $post_vars) : bool
     {
+        $current_step = $this->steps[$this->current];
+        $current_step->setup($this->config, $this->selection);
+
+        if(!$current_step->confirm($post_vars, $this->selection)) {
+            $this->error = $current_step->error ?? 'Generic error msg';
+            return false;
+        }
+        $this->selection[$this->current] = $current_step->user_input;
         if($this->current < count($this->steps)) {
             $this->current++;
-            return true;
-        }
-        if($this->current === count($this->steps)) {
+        } else {
             $this->ready = true;
-            return true;
         }
+        return true;
     }
 
 
@@ -57,6 +57,7 @@ class Configurator
     {
         $this->ready = false;
         if($this->current > 0) {
+            unset($this->selection[$this->current]);
             $this->current--;
             return true;
         }
@@ -71,7 +72,8 @@ class Configurator
     public function state()
     {
         return [
-            'current' => $this->current
+            'current' => $this->current,
+            'selection' => $this->selection
         ];
     }
 
