@@ -4,7 +4,8 @@ namespace Grav\Plugin;
 use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
 use Grav\Plugin\IServConfigurator\Configurator;
-use Grav\Plugin\IServConfigurator\Step\SchoolInfo;
+use Grav\Plugin\IServConfigurator\ConfiguratorException;
+
 
 
 /**
@@ -13,6 +14,7 @@ use Grav\Plugin\IServConfigurator\Step\SchoolInfo;
  */
 class IServConfiguratorPlugin extends Plugin
 {
+
     /**
      * @return array
      */
@@ -38,6 +40,51 @@ class IServConfiguratorPlugin extends Plugin
         if ($this->isAdmin()) {
             return;
         }
+        $config = $this->config();
+        $uri = $this->grav['uri'];
+        switch (ltrim($uri->getCurrentRoute(), '/')) {
+
+            case $config['main_route']:
+                $this->enable(
+                    [
+                        'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
+                        'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
+                        'onPageInitialized' => ['onPageInitialized', 0],
+                    ]   
+                );
+                break;   
+
+            case $config['post_route']:
+                $session = $this->grav['session'];
+                $configurator = new Configurator(
+                    $config,
+                    $session->configurator   
+                );
+                if(isset($_POST['action_confirm'])) {
+                    if($configurator->confirmCurrentStep($_POST)) {
+                        $session->configurator = $configurator->state();
+                        header("Location: /" . $config['main_route']);
+                        exit;
+
+                    } else {
+                        echo 'Fehler';
+                        exit;
+                    }
+                } elseif (isset($_POST['action_back'])) {
+                    if($configurator->back()) {
+                        $session->configurator = $configurator->state();
+                        header("Location: /" . $config['main_route']);
+                        exit;
+                    } else {
+                        throw new ConfiguratorException('Method ' . Configurator::class . '::back() returned false.');
+                    }
+                }   
+            
+
+            
+        }
+        
+
         $this->enable(
             [
                 'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
@@ -50,14 +97,7 @@ class IServConfiguratorPlugin extends Plugin
 
     public function onPageInitialized()
     {
-        $config = $this->grav['config'];
-        $request = $this->grav['request'];
-        if($request->getMethod() === 'POST') {
-            
-            header('Content-Type: application/json');
-            echo json_encode($new_state);
-            exit;
-        }  
+      
     }
 
 
@@ -78,9 +118,10 @@ class IServConfiguratorPlugin extends Plugin
         $this->grav['assets']->addJs('plugin://i-serv-configurator/assets/configurator.js');
         $this->grav['assets']->addCss('plugin://i-serv-configurator/assets/configurator.css'); 
 
-        $config = $this->grav['config'];
-        $session = $this->grav['session'];
-        $configurator = new Configurator($this->grav['config'], $session->configurator);  
+        $configurator = new Configurator(
+            $this->config(), 
+            $this->grav['session']->configurator
+        );  
 
         $twig = $this->grav['twig'];
         $twig->twig_vars['configurator'] = $configurator->outputCurrent();   

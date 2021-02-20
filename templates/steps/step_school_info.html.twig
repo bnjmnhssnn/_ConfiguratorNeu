@@ -4,7 +4,7 @@
         <form 
             class="configurator-step-form"
             method="post"
-            action="{{ configurator.form_target }}">
+            action="{{ configurator.post_route }}">
             <input type="hidden" name="step_id" value="{{ step.id }}">
             <h5>{{ configurator.title }}</h5>
             <p>{{ configurator.paragraph }}</p>
@@ -12,7 +12,7 @@
                 <table class="configurator-choice-table">
                 </table>
             </fieldset>
-            <button type="button" class="configurator-step-btn confirm-btn">Bestätigen</button>
+            <input type="submit" name="action_confirm" value="Bestätigen" />
         </form>
     </div>
 {% endblock %}

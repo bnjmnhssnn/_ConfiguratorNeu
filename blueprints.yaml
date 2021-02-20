@@ -30,10 +30,19 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-    configurator_form_target:
+
+    main_route:
         type: text
-        label: Zielpfad für Formulare
+        label: Haupt-Pfad für Konfigurator
+        default: 'configurator'
+    post_route:
+        type: text
+        label: Pfad für Formulare
         default: 'configurator/submit'
+    success_route:
+        type: text
+        label: Pfad für Success Page
+        default: 'configurator/success'
         
     step_school_info_title:
       type: text

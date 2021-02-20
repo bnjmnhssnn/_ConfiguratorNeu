@@ -1,16 +1,13 @@
 <?php
 namespace Grav\Plugin\IServConfigurator\Step;
 
-use Grav\Common\Config\Config;
-
 class SchoolInfo implements StepInterface
 {
-    public function __construct(Config $config)
+    public function __construct(array $config)
     {
         $this->template = 'step_school_info';
-        $data = $config->get('plugins.i-serv-configurator');
-        $this->title = $data['step_school_info_title'];
-        $this->paragraph = $data['step_school_info_paragraph'];
+        $this->title = $config['step_school_info_title'];
+        $this->paragraph = $config['step_school_info_paragraph'];
 
     }
 
