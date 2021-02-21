@@ -31,8 +31,14 @@
                         </tr>
                     {% endfor %}
                 </table>
-                {{ configurator.input_student_count.label }}
-                <input type="number" name="student_count">
+                <table class="configurator-text-input-table">
+                    <tr>
+                        <td class="label">{{ configurator.input_student_count.label }}</td>
+                        <td>
+                            <input type="number" name="student_count">
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
             <div class="configurator-btn-wrapper group">
                 <input 

@@ -99,9 +99,13 @@
 .configurator-step-btn.confirm-btn:hover {
     background-color: #007bff;   
 }
+.configurator-step-btn.confirm-btn.final-btn {
+    float: left;
+    padding: 0.5em 2em;
+    background-color: #2ab22a;   
+}
 .configurator-btn-wrapper {
     padding-top: 1em;
-
 }
 .configurator-summary-wrapper {
     padding: 1.5em 2em 2em 2em;
@@ -134,4 +138,24 @@
 }
 .configurator-summary-table .ruler {
     border-bottom: 1px solid grey;
+}
+.configurator-text-input-table {
+    width: 100%;
+}
+.configurator-text-input-table td {
+    padding: 0.5em 0;
+}
+.configurator-text-input-table input[type=text],
+.configurator-text-input-table input[type=email],
+.configurator-text-input-table input[type=number],
+.configurator-text-input-table input[type=textarea] {
+    width: 100%;
+    border: 1px solid #cccccc;
+}
+.configurator-text-input-table input[type=textarea] {
+    min-height: 120px;
+}
+.configurator-text-input-table .label {
+    font-weight: 700;
+    font-size: 14px;
 }

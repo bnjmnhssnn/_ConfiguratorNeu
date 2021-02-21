@@ -10,7 +10,37 @@
             {% include "partials/step_indicator.html.twig" %}
             <h3>{{ configurator.title }}</h3>
             <p>{{ configurator.paragraph }}</p>
-            {{ configurator.summary_table_l }}
+            <table class="configurator-text-input-table">
+                <tr>
+                    <td class="label">{{ configurator.email_label }}</td>
+                    <td>
+                        <input type="email" name="email">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">{{ configurator.contact_label }}</td>
+                    <td>
+                        <input type="text" name="contact">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">{{ configurator.schoolname_label }}</td>
+                    <td>
+                        <input type="text" name="school_name">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input 
+                            type="textarea" 
+                            name="free_text"
+                            placeholder="{{ configurator.freetext_label }}"
+                            >
+                    </td>
+                </tr>
+
+
+            </table>
             <div class="configurator-btn-wrapper group">
                 <input 
                     type="submit" 
@@ -21,7 +51,7 @@
                     type="submit" 
                     name="action_confirm" 
                     class="configurator-step-btn confirm-btn final-btn" 
-                    value="Bestätigen" />
+                    value="Anfrage senden" />
             </div>
         </form>
     </div>
