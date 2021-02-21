@@ -31,7 +31,8 @@
     color:#0056b3;
     margin-left: 44px;
     cursor: pointer;
-    text-decoration: underline; 
+    text-decoration: underline;
+    font-size: 12px; 
 }
 .configurator-choice-table .hidden-info-tr td {
     padding: 2em;

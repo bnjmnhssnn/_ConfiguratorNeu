@@ -7,18 +7,18 @@ class Helpers
     {
         $switch_filter = self::getSwitchFilter($configurator_selection);
         // Artikel werden abhängig ein/oder ausgeblendet
-        $options = array_filter(
+        $options = array_values(array_filter(
             $options,
             $switch_filter
-        );
+        ));
         // Preise werden abhängig ein/oder ausgeblendet
         return array_map(
             function($option) use ($switch_filter) {
-                if(array_keys($option['price']) === range(0, count($option['price']))) {
-                    $option['price'] = array_filter(
-                        $option_price,
+                if(self::isComplexPrice($option['price'])) {
+                    $option['price'] = array_values(array_filter(
+                        $option['price'],
                         $switch_filter
-                    );
+                    ));
                 }
                 return $option;
             },
@@ -64,5 +64,10 @@ class Helpers
                 return empty($intersection);   
             }
         };
+    }
+
+    public static function isComplexPrice(array $price) : bool
+    {
+        return (array_keys($price) === range(0, count($price) - 1));   
     }
 }

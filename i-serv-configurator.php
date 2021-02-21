@@ -63,9 +63,12 @@ class IServConfiguratorPlugin extends Plugin
                 if(isset($_POST['action_confirm'])) {
                     if($configurator->confirmCurrentStep($_POST)) {
                         $session->configurator = $configurator->state();
-                        header("Location: /" . $config['main_route']);
+                        if($configurator->ready()) {
+                            header("Location: /" . $config['success_route']);   
+                        } else {
+                            header("Location: /" . $config['main_route']);
+                        }
                         exit;
-
                     } else {
                         echo $configurator->error;
                         exit;

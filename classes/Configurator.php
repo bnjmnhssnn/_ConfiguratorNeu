@@ -7,20 +7,24 @@ class Configurator
     protected $current = 0;
     protected $selection = [];
     protected $config = NULL;
+    protected $ready = false;
 
     public function __construct(array $plugin_config, array $state_from_session = NULL)
     {
         $this->current = $state_from_session['current'] ?? 0;
         $this->selection = $state_from_session['selection'] ?? [];
-    
+        $this->ready = $state_from_session['ready'] ?? false;
+        $this->config = $plugin_config;
+
         $this->steps = [
             new Step\SchoolInfo(0),
             new Step\MainProduct(1),
             new Step\Backup(2),
             new Step\Summary(3)
         ];
-
-        $this->config = $plugin_config;
+        foreach($this->steps as $step) {
+            $step->setup($this->config, $this->selection);
+        }
     }
 
     public function outputCurrent()
@@ -30,36 +34,14 @@ class Configurator
         $vars = $current_step->getVars();
         $vars['post_route'] = $this->config['post_route'];
         $vars['selection'] = print_r($this->selection, true);
-        $vars['summary'] = [
-            'lines' => [
-                [
-                    'name' => 'Grundgebühr (jährlich)',
-                    'price' => 250
-                ],
-                [
-                    'name' => 'Einrichtungspauschale (einmalig)',
-                    'price' => 500
-                ],
-            ],
-            'totals' => [
-                [
-                    'name' => 'Kosten im ersten Jahr',
-                    'price' => 750
-                ],
-                [
-                    'name' => 'Kosten in den Folgejahren',
-                    'price' => 250
-                ],
-            ]
-        ];
+        $summary = new Summary($this->steps);
+        $vars['summary'] = $summary->getVars($this->selection);
         return $vars;
     }
 
     public function confirmCurrentStep(array $post_vars) : bool
     {
         $current_step = $this->steps[$this->current];
-        $current_step->setup($this->config, $this->selection);
-
         if(!$current_step->confirm($post_vars, $this->selection)) {
             $this->error = $current_step->error ?? 'Generic error msg';
             return false;
@@ -73,13 +55,12 @@ class Configurator
         return true;
     }
 
-
-
     public function back() : bool
     {
         $this->ready = false;
         if($this->current > 0) {
             unset($this->selection[$this->current]);
+            unset($this->selection[$this->current - 1]);
             $this->current--;
             return true;
         }
@@ -88,14 +69,15 @@ class Configurator
 
     public function ready()
     {
-
+        return $this->ready;
     }
 
     public function state()
     {
         return [
             'current' => $this->current,
-            'selection' => $this->selection
+            'selection' => $this->selection,
+            'ready' => $this->ready
         ];
     }
 

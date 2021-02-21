@@ -19,11 +19,11 @@ class MainProduct implements StepInterface
         $this->vars['title'] = $config['step_main_product_title'];
         $this->vars['paragraph'] = $config['step_main_product_paragraph'];
 
-        $student_count = $current_selection[0]['student_count'];
+        $student_count = $current_selection[0]['student_count'] ?? NULL;
 
         // Hardware Optionen-->
         $hardware_ids = array_map('trim', explode(',', $config['step_main_product_hardware_ids']));
-        $remove = ($student_count > 400) ? ($student_count > 1200) ? [4,5] : [4] : [];
+        $remove = (NULL !== $student_count && $student_count > 400) ? (NULL !== $student_count && $student_count > 1200) ? [4,5] : [4] : [];
         $hardware_ids = array_diff($hardware_ids, $remove ?? []); 
         $this->vars['input_hardware'] = [
             'title' => $config['step_main_product_hardware_label'],
@@ -37,7 +37,7 @@ class MainProduct implements StepInterface
 
         // Cloud Optionen -->
         $cloud_ids = array_map('trim', explode(',', $config['step_main_product_cloud_ids']));
-        $remove = ($student_count > 400) ? ($student_count > 1200) ? [7,8] : [7] : [];
+        $remove = (NULL !== $student_count && $student_count > 400) ? (NULL !== $student_count && $student_count > 1200) ? [7,8] : [7] : [];
         $cloud_ids = array_diff($cloud_ids, $remove ?? []); 
         $this->vars['input_cloud'] = [
             'title' => $config['step_main_product_cloud_label'],

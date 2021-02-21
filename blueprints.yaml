@@ -82,7 +82,7 @@ form:
                 -
                   id: 1
                   name: Grund- oder Förderschule
-                  summary_name: jährl. pro-Kopf-Gebühr für Grund- und Förderschulen
+                  summary_name: %d &times; Pro-Nutzer-Gebühr (jährl.)
                   price: 
                     value: 4
                     class: 3
@@ -90,7 +90,7 @@ form:
                 - 
                   id: 2
                   name: Weiterführende Schule
-                  summary_name: jährl. pro-Kopf-Gebühr für weiterführenden Schulen
+                  summary_name: %d &times; Pro-Nutzer-Gebühr (jährl.)
                   price: 
                     value: 5
                     class: 3
@@ -98,7 +98,7 @@ form:
                 -
                   id: 3
                   name: Berufsschule
-                  summary_name: jährl. pro-Kopf-Gebühr für Berufsschulen
+                  summary_name: %d &times; Pro-Nutzer-Gebühr (jährl.)
                   price: 
                     value: 6
                     class: 3
@@ -143,48 +143,48 @@ form:
               default: |
                 -
                   id: 4
-                  name: Portal-M
-                  summary_name: Server-Hardware Portal-M
+                  name: Server-Hardware Portal-M
+                  summary_name: Server-Hardware Portal-M (einmalig)
                   price: 
                     value: 4595
                     class: 1
                     info: einmalig
                 -
                   id: 5
-                  name: Portal-L
-                  summary_name: Server-Hardware Portal-L
+                  name: Server-Hardware Portal-L
+                  summary_name: Server-Hardware Portal-L (einmalig)
                   price: 
                     value: 6595
                     class: 1
                     info: einmalig
                 -
                   id: 6
-                  name: Portal-XL
-                  summary_name: Server-Hardware Portal-XL
+                  name: Server-Hardware Portal-XL
+                  summary_name: Server-Hardware Portal-XL (einmalig)
                   price: 
                     value: 11595
                     class: 1
                     info: einmalig
                 -
                   id: 7
-                  name: Hosting-M
-                  summary_name: CloudIServ Hosting-M
+                  name: CloudIServ Hosting-M
+                  summary_name: CloudIServ Hosting-M (jährl.)
                   price: 
                     value: 250
                     class: 2
                     info: jährlich
                 -
                   id: 8
-                  name: Hosting-L
-                  summary_name: CloudIServ Hosting-L
+                  name: CloudIServ Hosting-L
+                  summary_name: CloudIServ Hosting-L (jährl.)
                   price: 
                     value: 450
                     class: 2
                     info: jährlich
                 -
                   id: 9
-                  name: Hosting-XL
-                  summary_name: CloudIServ Hosting-XL
+                  name: CloudIServ Hosting-XL
+                  summary_name: CloudIServ Hosting-XL (jährl.)
                   price: 
                     value: 800
                     class: 2
@@ -217,8 +217,8 @@ form:
               default: |
                 -
                   id: 10
-                  name: Backup-L
-                  summary_name: Backup-Hardware Backup-L
+                  name: Backup-Hardware Backup-L
+                  summary_name: Backup-Hardware Backup-L (einmalig)
                   on_switch: 4
                   price: 
                     value: 995
@@ -226,8 +226,8 @@ form:
                     info: einmalig
                 -
                   id: 11
-                  name: Backup-XL
-                  summary_name: Backup-Hardware Backup-XL
+                  name: Backup-Hardware Backup-XL
+                  summary_name: Backup-Hardware Backup-XL (einmalig)
                   on_switch: 5,6
                   price: 
                     value: 1395
@@ -236,21 +236,24 @@ form:
                 - 
                   id: 12
                   name: Cloud-Backup
-                  summary_name: Einrichtung Cloud-Backup
+                  summary_name: Cloud-Backup (Einrichtungspauschale + jährl.)
                   price: 
                     -
                       value: 200
                       price_class: 1
                       price_info: einmalige Einrichtungspauschale
+                      summary_name: Cloud-Backup Einrichtungspauschale (einmalig)
                     -
                       value: 150
                       price_class: 2
                       price_info: jährlich
+                      summary_name: Cloud-Backup Gebühr (jährl.)
                       on_switch: 1,2
                     -
                       value: 250
                       price_class: 2
                       price_info: jährlich
+                      summary_name: Cloud-Backup Gebühr Berufsschulen (jährl.)
                       on_switch: 3
         step_4_tab:
           type: tab
