@@ -48,23 +48,29 @@ class Summary
                     $total_yearly += $price;
                     break;
 
-                // Schritt 2 Hautprodukt
+                // Schritt 2 Hauptprodukt
                 case 1:
                     $option_id = $step_state['main_product'];
                     try {
-                        $option = $this->optionById($step_data['input_hardware']['options'], $option_id);
+                        $options = [$this->optionById($step_data['input_hardware']['options'], $option_id)];
+                        if(!empty($optional_id = $step_state['main_product_optional'])) {
+                            $options[] = $this->optionById($step_data['input_hardware_optional']['options'], $optional_id);
+                        }
                     } catch (ConfiguratorException $e) {
-                        $option = $this->optionById($step_data['input_cloud']['options'], $option_id);
-                    }  
-                    $price = $option['price'];
-                    if(Helpers::isComplexPrice($price)) {
-                        throw new ConfiguratorException('Complex Prices are not supported by Main Product step, yet.');
-                    }
-                    $lines[] = [
-                        'name' => $option['summary_name'],
-                        'price' => $price['value']
-                    ];
-                    $total_first_year += $price['value'];    
+                        $options = [$this->optionById($step_data['input_cloud']['options'], $option_id)];
+                    } 
+                    
+                    foreach($options as $option) {
+                        $price = $option['price'];
+                        if(Helpers::isComplexPrice($price)) {
+                            throw new ConfiguratorException('Complex Prices are not supported by Main Product step, yet.');
+                        }
+                        $lines[] = [
+                            'name' => $option['summary_name'],
+                            'price' => $price['value']
+                        ];
+                        $total_first_year += $price['value']; 
+                    }   
                     break;
 
                 // Schritt 3 Backuplösung

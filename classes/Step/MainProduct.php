@@ -27,6 +27,18 @@ class MainProduct extends AbstractStep implements StepInterface
             )
         ];
 
+        // Optionale Hardware Optionen-->
+        $optional_hardware_ids = array_map('trim', explode(',', $this->config['step_main_product_optional_hardware_ids']));
+        $this->vars['input_hardware_optional'] = [
+            'title' => 'lorem ipsum',
+            'options' => array_filter(
+                $this->config['step_main_product_options'],
+                function($item) use ($optional_hardware_ids) {
+                    return in_array($item['id'], $optional_hardware_ids);
+                }
+            )
+        ];
+
         // Cloud Optionen -->
         $cloud_ids = array_map('trim', explode(',', $this->config['step_main_product_cloud_ids']));
         $remove = (NULL !== $student_count && $student_count > 400) ? (NULL !== $student_count && $student_count > 1200) ? [7,8] : [7] : [];
@@ -54,7 +66,8 @@ class MainProduct extends AbstractStep implements StepInterface
             return false; 
         }
         $this->user_input = [
-            'main_product' => (int) $post_vars['main_product']        
+            'main_product' => (int) $post_vars['main_product'],
+            'main_product_optional' => (int) $post_vars['main_product_optional'] ?? NULL       
         ];
         return true;
     }

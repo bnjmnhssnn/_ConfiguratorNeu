@@ -135,6 +135,10 @@ form:
               type: text
               label: Diese Hardware Optionen anzeigen (IDs kommasepariert)
               default: 4,5,6
+            step_main_product_optional_hardware_ids:
+              type: text
+              label: optionale Hardware Optionen (IDs kommasepariert)
+              default: 101,102
             step_main_product_cloud_label:
               type: text
               label: Label für Cloud Auswahl
@@ -201,6 +205,22 @@ form:
                     value: 800
                     class: 2
                     info: jährlich
+                -
+                  id: 101
+                  name: Unterbrechungsfreie Stromversorgung 750VA
+                  summary_name: Unterbrechungsfreie Stromversorgung 750VA (einmalig)
+                  price: 
+                    value: 410
+                    class: 1
+                    info: einmalig
+                -
+                  id: 102
+                  name: Unterbrechungsfreie Stromversorgung 750VA 19"
+                  summary_name: Unterbrechungsfreie Stromversorgung 750VA 19" (einmalig)
+                  price: 
+                    value: 625
+                    class: 1
+                    info: einmalig
         step_3_tab:
           type: tab
           title: 3. Backup
