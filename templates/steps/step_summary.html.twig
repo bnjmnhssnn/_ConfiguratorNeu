@@ -1,6 +1,7 @@
 {% block step_summary %}
     <div 
         class="configurator-step-wrapper">
+        {% include "partials/error_msg.html.twig" %}
         <form 
             class="configurator-step-form"
             method="post"
@@ -19,7 +20,7 @@
                 <input 
                     type="submit" 
                     name="action_confirm" 
-                    class="configurator-step-btn confirm-btn" 
+                    class="configurator-step-btn confirm-btn final-btn" 
                     value="Bestätigen" />
             </div>
         </form>

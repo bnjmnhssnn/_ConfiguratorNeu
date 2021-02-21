@@ -67,17 +67,25 @@ form:
               default: Schulform wählen
             step_school_info_option_ids:
               type: text
-              label: Options-IDs (Kommasepariert)
+              label: Diese Optionen anzeigen (IDs kommasepariert)
               default: 1,2,3
+            step_school_info_error_1:
+              type: text
+              label: Fehler Schulform-Auswahl 
+              default: Bitte wählen Sie eine Schulform
             step_school_info_student_count_label:
               type: text
               label: Label für Schülerzahl-Eingabe
               default: Wieviele Schüler besuchen Ihre Schule?
+            step_school_info_error_2:
+              type: text
+              label: Fehler Schülerzahl-Eingabe 
+              default: Bitte geben Sie an, wieviele Schüler ihre Schule besuchen
             step_school_info_options:
               type: editor
               validate:
                 type: yaml
-              label: Optionen
+              label: Optionen definieren
               default: |
                 -
                   id: 1
@@ -125,7 +133,7 @@ form:
               default: Hardware Lösungen
             step_main_product_hardware_ids:
               type: text
-              label: Hardware Artikel-IDs (Kommasepariert)
+              label: Diese Hardware Optionen anzeigen (IDs kommasepariert)
               default: 4,5,6
             step_main_product_cloud_label:
               type: text
@@ -133,13 +141,17 @@ form:
               default: Cloud Lösungen
             step_main_product_cloud_ids:
               type: text
-              label: Cloud Artikel-IDs (Kommasepariert)
+              label: Diese Cloud Optionen anzeigen (IDs kommasepariert)
               default: 7,8,9
+            step_main_product_error_1:
+              type: text
+              label: Fehlermeldung keine Auswahl
+              default: Bitte wählen Sie eine Hardware oder Cloud Lösung aus
             step_main_product_options:
               type: editor
               validate:
                 type: yaml
-              label: Artikel
+              label: Optionen definieren
               default: |
                 -
                   id: 4
@@ -209,11 +221,19 @@ form:
               type: text
               label: Label für Backup Auswahl
               default: Wählen Sie eine Backup-Lösung
+            step_backup_option_ids:
+              type: text
+              label: Diese Optionen anzeigen (IDs kommasepariert)
+              default: 10,11,12
+            step_backup_options_error_1:
+              type: text
+              label: Fehlermeldung keine Auswahl
+              default: Bitte wählen Sie eine Backup Lösung aus
             step_backup_options:
               type: editor
               validate:
                 type: yaml
-              label: Artikel
+              label: Optionen definieren
               default: |
                 -
                   id: 10
@@ -240,19 +260,19 @@ form:
                   price: 
                     -
                       value: 200
-                      price_class: 1
-                      price_info: einmalige Einrichtungspauschale
+                      class: 1
+                      info: einmalige Einrichtungspauschale
                       summary_name: Cloud-Backup Einrichtungspauschale (einmalig)
                     -
                       value: 150
-                      price_class: 2
-                      price_info: jährlich
+                      class: 2
+                      info: jährlich
                       summary_name: Cloud-Backup Gebühr (jährl.)
                       on_switch: 1,2
                     -
                       value: 250
-                      price_class: 2
-                      price_info: jährlich
+                      class: 2
+                      info: jährlich
                       summary_name: Cloud-Backup Gebühr Berufsschulen (jährl.)
                       on_switch: 3
         step_4_tab:
@@ -271,3 +291,33 @@ form:
                 luja Gschicht des is a gmahde Wiesn: Fünferl back mas Guglhupf, owe ded is gor. Etza da, 
                 hog di hi Guglhupf moand nia Charivari Broadwurschtbudn wea nia ausgähd, kummt nia hoam 
                 hawadere midananda in da greana Au. Wos so schee woaß nia need, luja. San scheans san eam es zwoa Wiesn.
+            step_summary_email_label:
+              type: text
+              label: Label für E-Mail
+              default: E-Mail
+            step_summary_email_error:
+              type: text
+              label: Fehlermeldung E-Mail
+              default: Bitte geben Sie eine gültige E-Mail Adresse an
+            step_summary_contact_label:
+              type: text
+              label: Label für Ansprechpartner
+              default: Ansprechpartner
+            step_summary_contact_error:
+              type: text
+              label: Fehlermeldung Ansprechpartner
+              default: Bitte geben Sie Ihren Namen bzw. einen Ansprechpartner für uns an
+            step_summary_schoolname_label:
+              type: text
+              label: Label Schulname
+              default: Name Ihrer Schule
+            step_summary_schoolname_error:
+              type: text
+              label: Fehlermeldung Schulname
+              default: Bitte geben Sie den Namen Ihrer Schule an
+            step_summary_freetext_label:
+              type: text
+              label: Freitextfeld Platzhalter
+              default: Fragen an uns
+            
+

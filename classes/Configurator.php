@@ -17,20 +17,20 @@ class Configurator
         $this->config = $plugin_config;
 
         $this->steps = [
-            new Step\SchoolInfo(0),
-            new Step\MainProduct(1),
-            new Step\Backup(2),
-            new Step\Summary(3)
+            new Step\SchoolInfo($plugin_config, 0),
+            new Step\MainProduct($plugin_config, 1),
+            new Step\Backup($plugin_config, 2),
+            new Step\Summary($plugin_config, 3)
         ];
         foreach($this->steps as $step) {
-            $step->setup($this->config, $this->selection);
+            $step->setup($this->selection);
         }
     }
 
     public function outputCurrent()
     {
         $current_step = $this->steps[$this->current];
-        $current_step->setup($this->config, $this->selection);
+        $current_step->setup($this->selection);
         $vars = $current_step->getVars();
         $vars['post_route'] = $this->config['post_route'];
         $vars['selection'] = print_r($this->selection, true);
@@ -46,7 +46,7 @@ class Configurator
             $this->error = $current_step->error ?? 'Generic error msg';
             return false;
         }
-        $this->selection[$this->current] = $current_step->user_input;
+        $this->selection[$this->current] = $current_step->getInput();
         if($this->current < count($this->steps)) {
             $this->current++;
         } else {

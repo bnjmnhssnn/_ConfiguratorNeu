@@ -3,27 +3,19 @@ namespace Grav\Plugin\IServConfigurator\Step;
 
 use Grav\Plugin\IServConfigurator\ConfiguratorException;
 
-
-class SchoolInfo implements StepInterface
+class SchoolInfo extends AbstractStep implements StepInterface
 {
-    public $vars = [];
-
-    public function __construct($id)
-    {
-        $this->vars['step_id'] = $id;
-    }
-
-    public function setup(array $config, array $current_selection) : void
+    public function setup(array $current_selection) : void
     {
         $this->vars['template'] = 'step_school_info';
-        $this->vars['title'] = $config['step_school_info_title'];
-        $this->vars['paragraph'] = $config['step_school_info_paragraph'];
+        $this->vars['title'] = $this->config['step_school_info_title'];
+        $this->vars['paragraph'] = $this->config['step_school_info_paragraph'];
 
-        $option_ids = array_map('trim', explode(',', $config['step_school_info_option_ids']));
+        $option_ids = array_map('trim', explode(',', $this->config['step_school_info_option_ids']));
         $this->vars['input_schooltype'] = [
-            'title' => $config['step_school_info_schooltype_label'],
+            'title' => $this->config['step_school_info_schooltype_label'],
             'options' => array_filter(
-                $config['step_school_info_options'],
+                $this->config['step_school_info_options'],
                 function($item) use ($option_ids) {
                     return in_array($item['id'], $option_ids);
                 }
@@ -31,7 +23,7 @@ class SchoolInfo implements StepInterface
         ];
         $this->vars['input_student_count'] = [
             'id' => 100,
-            'label' => $config['step_school_info_student_count_label']
+            'label' => $this->config['step_school_info_student_count_label']
         ]; 
     }
 
@@ -55,15 +47,5 @@ class SchoolInfo implements StepInterface
             'student_count' => (int) $post_vars['student_count']
         ];
         return true;
-    }
-
-    public function getVars() : array
-    {
-        return $this->vars;
-    }
-
-    public function getInput() : array
-    {
-        return $this->user_input;
     }
 }

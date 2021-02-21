@@ -81,10 +81,7 @@ class IServConfiguratorPlugin extends Plugin
                     } else {
                         throw new ConfiguratorException('Method ' . Configurator::class . '::back() returned false.');
                     }
-                }   
-            
-
-            
+                }       
         }
         
 

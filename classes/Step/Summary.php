@@ -3,20 +3,13 @@ namespace Grav\Plugin\IServConfigurator\Step;
 
 use Grav\Plugin\IServConfigurator\ConfiguratorException;
 
-class Summary implements StepInterface
+class Summary extends AbstractStep implements StepInterface
 {
-    public $vars = [];
-
-    public function __construct($id)
-    {
-        $this->vars['step_id'] = $id;
-    }
-
-    public function setup(array $config, array $current_selection) : void
+    public function setup(array $current_selection) : void
     {
         $this->vars['template'] = 'step_summary';
-        $this->vars['title'] = 'Zusammenfassung & bestätigen';//$config['step_backup_title'];
-        $this->vars['paragraph'] = 'Lorem ispum dolor sit amet';//$config['step_backup_paragraph'];
+        $this->vars['title'] = 'Zusammenfassung & bestätigen';
+        $this->vars['paragraph'] = 'Lorem ispum dolor sit amet';
     }
 
     public function confirm(array $post_vars, array $configurator_selection) : bool
@@ -45,15 +38,4 @@ class Summary implements StepInterface
         ];
         return true;
     }
-
-    public function getVars() : array
-    {
-        return $this->vars;
-    }
-
-    public function getInput() : array
-    {
-        return $this->user_input;
-    }
- 
 }

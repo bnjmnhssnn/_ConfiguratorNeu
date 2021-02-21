@@ -5,25 +5,18 @@ use Grav\Plugin\IServConfigurator\ConfiguratorException;
 use Grav\Plugin\IServConfigurator\Helpers;
 
 
-class Backup implements StepInterface
+class Backup extends AbstractStep implements StepInterface
 {
-    public $vars = [];
-
-    public function __construct($id)
-    {
-        $this->vars['step_id'] = $id;
-    }
-
-    public function setup(array $config, array $current_selection) : void
+    public function setup(array $current_selection) : void
     {
         $this->vars['template'] = 'step_backup';
-        $this->vars['title'] = $config['step_backup_title'];
-        $this->vars['paragraph'] = $config['step_backup_paragraph'];
+        $this->vars['title'] = $this->config['step_backup_title'];
+        $this->vars['paragraph'] = $this->config['step_backup_paragraph'];
 
         $this->vars['input_backup'] = [
-            'title' => $config['step_backup_options_label'],
+            'title' => $this->config['step_backup_options_label'],
             'options' => Helpers::applySwitches(
-                $config['step_backup_options'],
+                $this->config['step_backup_options'],
                 $current_selection
             )
         ];
@@ -45,15 +38,4 @@ class Backup implements StepInterface
         ];
         return true;
     }
-
-    public function getVars() : array
-    {
-        return $this->vars;
-    }
-
-    public function getInput() : array
-    {
-        return $this->user_input;
-    }
- 
 }

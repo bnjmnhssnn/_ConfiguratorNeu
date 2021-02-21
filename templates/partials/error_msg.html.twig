@@ -1,0 +1,7 @@
+{% block error_msg %}
+    {% if configurator.error %}
+        <div class="notices red">
+            <p>{{ configurator.error }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

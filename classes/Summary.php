@@ -31,6 +31,7 @@ class Summary
 
             switch($step_index) {
 
+                // Schritt 1 Schultyp & Schüleranzahl
                 case 0:
                     $option_id = $step_state['schooltype'];
                     $student_count = $step_state['student_count'];
@@ -47,11 +48,14 @@ class Summary
                     $total_yearly += $price;
                     break;
 
+                // Schritt 2 Hautprodukt
                 case 1:
                     $option_id = $step_state['main_product'];
-                    $option = 
-                            $this->optionById($step_data['input_hardware']['options'], $option_id) 
-                        ??  $this->optionById($step_data['input_cloud']['options'], $option_id);
+                    try {
+                        $option = $this->optionById($step_data['input_hardware']['options'], $option_id);
+                    } catch (ConfiguratorException $e) {
+                        $option = $this->optionById($step_data['input_cloud']['options'], $option_id);
+                    }  
                     $price = $option['price'];
                     if(Helpers::isComplexPrice($price)) {
                         throw new ConfiguratorException('Complex Prices are not supported by Main Product step, yet.');
@@ -63,6 +67,7 @@ class Summary
                     $total_first_year += $price['value'];    
                     break;
 
+                // Schritt 3 Backuplösung
                 case 2:
                     $option_id = $step_state['backup'];
                     $option = $this->optionById($step_data['input_backup']['options'], $option_id);
@@ -74,7 +79,7 @@ class Summary
                                 'price' => $sub_price['value']
                             ];
                             $total_first_year += $sub_price['value'];    
-                            if ($sub_price['price_class'] === 2) {
+                            if ($sub_price['class'] === 2) {
                                 $total_yearly += $sub_price['value'];
                             }
                         }
@@ -83,8 +88,8 @@ class Summary
                             'name' => $option['summary_name'],
                             'price' => $price['value']
                         ];
-                        $total_first_year += $price['value'];    
-                        if ($sub_price['price_class'] === 2) {
+                        $total_first_year += $price['value'];  
+                        if ($price['class'] === 2) {
                             $total_yearly += $price['value'];
                         }
                     }
