@@ -49,7 +49,6 @@ class IServConfiguratorPlugin extends Plugin
                     [
                         'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
                         'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
-                        'onPageInitialized' => ['onPageInitialized', 0],
                     ]   
                 );
                 break;   
@@ -70,7 +69,8 @@ class IServConfiguratorPlugin extends Plugin
                         }
                         exit;
                     } else {
-                        echo $configurator->error;
+                        $session->configurator = $configurator->state(); // Error persistieren
+                        header("Location: /" . $config['main_route']);
                         exit;
                     }
                 } elseif (isset($_POST['action_back'])) {
@@ -83,23 +83,7 @@ class IServConfiguratorPlugin extends Plugin
                     }
                 }       
         }
-        
-
-        $this->enable(
-            [
-                'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
-                'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
-                'onPageInitialized' => ['onPageInitialized', 0],
-            ]   
-        );
     }
-
-
-    public function onPageInitialized()
-    {
-      
-    }
-
 
     /**
      * [onTwigTemplatePaths] Add twig paths to plugin templates.
@@ -117,13 +101,14 @@ class IServConfiguratorPlugin extends Plugin
     {
         $this->grav['assets']->addJs('plugin://i-serv-configurator/assets/configurator.js');
         $this->grav['assets']->addCss('plugin://i-serv-configurator/assets/configurator.css'); 
-
+        $session = $this->grav['session'];
         $configurator = new Configurator(
             $this->config(), 
-            $this->grav['session']->configurator
+            $session->configurator
         );  
-
         $twig = $this->grav['twig'];
-        $twig->twig_vars['configurator'] = $configurator->outputCurrent();   
+        $twig->twig_vars['configurator'] = $configurator->outputCurrent();
+        $session->configurator = $configurator->state(); // State kann sich in outputCurrent() geändert haben!
     }
+
 }

@@ -50,7 +50,7 @@ class MainProduct extends AbstractStep implements StepInterface
             );
         }
         if(empty($post_vars['main_product'])) {
-            $this->error = 'Missing required field \'main_product\''; 
+            $this->error = $this->config['step_main_product_error_1'] ?? 'Missing required field \'main_product\''; 
             return false; 
         }
         $this->user_input = [

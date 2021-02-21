@@ -30,7 +30,7 @@ class Backup extends AbstractStep implements StepInterface
             );
         }
         if(empty($post_vars['backup'])) {
-            $this->error = 'Missing required field \'backup\''; 
+            $this->error = $this->config['step_backup_options_error_1'] ?? 'Missing required field \'backup\''; 
             return false; 
         }
         $this->user_input = [

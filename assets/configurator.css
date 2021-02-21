@@ -10,6 +10,9 @@
 #configurator {
     display: flex;
 }
+#configurator .notices {
+    padding: 0.5em 1em;
+}
 .configurator-step-wrapper {
     padding: 1.5em 2em 2em 2em;
     border: 1px solid #e9e9e9;

@@ -35,11 +35,11 @@ class SchoolInfo extends AbstractStep implements StepInterface
             );
         }
         if(empty($post_vars['schooltype'])) {
-            $this->error = 'Missing required field \'schooltype\''; 
+            $this->error = $this->config['step_school_info_error_1'] ?? 'Missing required field \'schooltype\''; 
             return false; 
         }
         if(empty($post_vars['student_count'])) {
-            $this->error = 'Missing required field \'student_count\''; 
+            $this->error = $this->config['step_school_info_error_2'] ?? 'Missing required field \'student_count\''; 
             return false; 
         }
         $this->user_input = [

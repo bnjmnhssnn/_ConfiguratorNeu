@@ -8,12 +8,14 @@ class Configurator
     protected $selection = [];
     protected $config = NULL;
     protected $ready = false;
+    protected $error = NULL;
 
     public function __construct(array $plugin_config, array $state_from_session = NULL)
     {
         $this->current = $state_from_session['current'] ?? 0;
         $this->selection = $state_from_session['selection'] ?? [];
         $this->ready = $state_from_session['ready'] ?? false;
+        $this->error = $state_from_session['error'] ?? NULL;
         $this->config = $plugin_config;
 
         $this->steps = [
@@ -34,8 +36,11 @@ class Configurator
         $vars = $current_step->getVars();
         $vars['post_route'] = $this->config['post_route'];
         $vars['selection'] = print_r($this->selection, true);
+        $vars['error'] = $this->error;
         $summary = new Summary($this->steps);
         $vars['summary'] = $summary->getVars($this->selection);
+
+        $this->error = NULL;
         return $vars;
     }
 
@@ -77,6 +82,7 @@ class Configurator
         return [
             'current' => $this->current,
             'selection' => $this->selection,
+            'error' => $this->error,
             'ready' => $this->ready
         ];
     }
