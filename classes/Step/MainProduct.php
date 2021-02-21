@@ -67,7 +67,7 @@ class MainProduct extends AbstractStep implements StepInterface
         }
         $this->user_input = [
             'main_product' => (int) $post_vars['main_product'],
-            'main_product_optional' => (int) $post_vars['main_product_optional'] ?? NULL       
+            'main_product_optional' => (int) ($post_vars['main_product_optional'] ?? NULL)     
         ];
         return true;
     }

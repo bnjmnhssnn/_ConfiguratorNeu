@@ -41,7 +41,7 @@ class Summary
                     }
                     $price = $option['price']['value'] * $student_count;
                     $lines[] = [
-                        'name' => $option['summary_name'],
+                        'name' => sprintf($option['summary_name'], $student_count),
                         'price' => $price
                     ];
                     $total_first_year += $price;
