@@ -1,0 +1,22 @@
+{% block summary %}
+<div class="configurator-summary-wrapper">
+    <h5>Zusammenfassung</h5>
+    <table class="configurator-summary-table">
+        {% for line in configurator.summary.lines %} 
+            <tr class="line">
+                <td class="name-cell">{{ line.name }}</td>
+                <td class="price-cell">{{ line.price }}€</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2" class="ruler"></td>
+        </tr>
+        {% for total in configurator.summary.totals %} 
+            <tr class="total">
+                <td class="name-cell">{{ total.name }}</td>
+                <td class="price-cell">{{ total.price }}€</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

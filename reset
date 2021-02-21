@@ -1,0 +1,2 @@
+#!/bin/bash
+rm ../../config/plugins/i-serv-configurator.yaml

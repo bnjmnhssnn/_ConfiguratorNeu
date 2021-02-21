@@ -19,77 +19,35 @@ class MainProduct implements StepInterface
         $this->vars['title'] = $config['step_main_product_title'];
         $this->vars['paragraph'] = $config['step_main_product_paragraph'];
 
-        $this->vars['input_hardware'] = [
-            'title' => 'Hardware Lösungen',
-            'options' => [
-                [
-                    'id' => 1,
-                    'name' => 'Portal-M',
-                    'summary_name' => 'Server Hardware Portal-M',
-                    'price' => 4595,
-                    'price_info' => 'einmalig',
-                    'price_class' => 1
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Portal-L',
-                    'summary_name' => 'Server Hardware Portal-L',
-                    'price' => 6595,
-                    'price_info' => 'einmalig',
-                    'price_class' => 1
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Portal-XL',
-                    'summary_name' => 'Server Hardware Portal-XL',
-                    'price' => 11595,
-                    'price_info' => 'einmalig',
-                    'price_class' => 1
-                ]
-            ]
-        ];
-        if($current_selection[0]['student_count'] > 400) {
-            unset($this->vars['input_hardware']['options'][0]);
-        }
-        if($current_selection[0]['student_count'] > 1200) {
-            unset($this->vars['input_hardware']['options'][0]);
-        }
+        $student_count = $current_selection[0]['student_count'];
 
-        $this->vars['input_cloud'] = [
-            'title' => 'Cloud Lösungen',
-            'options' => [
-                [
-                    'id' => 4,
-                    'name' => 'Hosting-M',
-                    'summary_name' => 'Cloud-IServ Hosting-M',
-                    'price' => 250,
-                    'price_info' => 'jährlich',
-                    'price_class' => 2
-                ],
-                [
-                    'id' => 4,
-                    'name' => 'Hosting-L',
-                    'summary_name' => 'Cloud-IServ Hosting-L',
-                    'price' => 450,
-                    'price_info' => 'jährlich',
-                    'price_class' => 2
-                ],
-                [
-                    'id' => 5,
-                    'name' => 'Hosting-XL',
-                    'summary_name' => 'Cloud-IServ Hosting-XL',
-                    'price' => 800,
-                    'price_info' => 'jährlich',
-                    'price_class' => 2
-                ],
-            ]
+        // Hardware Optionen-->
+        $hardware_ids = array_map('trim', explode(',', $config['step_main_product_hardware_ids']));
+        $remove = ($student_count > 400) ? ($student_count > 1200) ? [4,5] : [4] : [];
+        $hardware_ids = array_diff($hardware_ids, $remove ?? []); 
+        $this->vars['input_hardware'] = [
+            'title' => $config['step_main_product_hardware_label'],
+            'options' => array_filter(
+                $config['step_main_product_options'],
+                function($item) use ($hardware_ids) {
+                    return in_array($item['id'], $hardware_ids);
+                }
+            )
         ];
-        if($current_selection[0]['student_count'] > 400) {
-            unset($this->vars['input_cloud']['options'][0]);
-        }
-        if($current_selection[0]['student_count'] > 1200) {
-            unset($this->vars['input_cloud']['options'][0]);
-        }
+
+        // Cloud Optionen -->
+        $cloud_ids = array_map('trim', explode(',', $config['step_main_product_cloud_ids']));
+        $remove = ($student_count > 400) ? ($student_count > 1200) ? [7,8] : [7] : [];
+        $cloud_ids = array_diff($cloud_ids, $remove ?? []); 
+        $this->vars['input_cloud'] = [
+            'title' => $config['step_main_product_cloud_label'],
+            'options' => array_filter(
+                $config['step_main_product_options'],
+                function($item) use ($cloud_ids) {
+                    return in_array($item['id'], $cloud_ids);
+                }
+            )
+        ];
     }
 
     public function confirm(array $post_vars, array $configurator_selection) : bool

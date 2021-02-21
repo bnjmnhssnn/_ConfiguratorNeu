@@ -6,11 +6,22 @@
             method="post"
             action="{{ configurator.post_route }}">
             <input type="hidden" name="step_id" value="{{ configurator.step_id }}">
-            <h5>{{ configurator.title }}</h5>
+            {% include "partials/step_indicator.html.twig" %}
+            <h3>{{ configurator.title }}</h3>
             <p>{{ configurator.paragraph }}</p>
             {{ configurator.summary_table_l }}
-            <input type="submit" name="action_back" value="Zurück" />
-            <input type="submit" name="action_confirm" value="Anfrage senden" />
+            <div class="configurator-btn-wrapper group">
+                <input 
+                    type="submit" 
+                    name="action_back"
+                    class="configurator-step-btn back-btn" 
+                    value="Zurück" />
+                <input 
+                    type="submit" 
+                    name="action_confirm" 
+                    class="configurator-step-btn confirm-btn" 
+                    value="Bestätigen" />
+            </div>
         </form>
     </div>
 {% endblock %}

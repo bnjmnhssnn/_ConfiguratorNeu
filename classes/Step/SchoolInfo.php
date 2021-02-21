@@ -19,40 +19,20 @@ class SchoolInfo implements StepInterface
         $this->vars['title'] = $config['step_school_info_title'];
         $this->vars['paragraph'] = $config['step_school_info_paragraph'];
 
+        $option_ids = array_map('trim', explode(',', $config['step_school_info_option_ids']));
         $this->vars['input_schooltype'] = [
-            'title' => 'Schulform wählen',
-            'options' => [
-                [
-                    'id' => 1,
-                    'name' => 'Grund- oder Förderschule',
-                    'summary_name' => 'jährl. pro-Kopf-Gebühr für Grund- und Förderschulen',
-                    'price' => 4,
-                    'price_info' => 'pro SchülerIn und Jahr',
-                    'price_class' => 3
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Weiterführende Schule',
-                    'summary_name' => 'jährl. pro-Kopf-Gebühr für Weiterführende Schulen',
-                    'price' => 5,
-                    'price_info' => 'pro SchülerIn und Jahr',
-                    'price_class' => 3
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Berufsschule',
-                    'summary_name' => 'jährl. pro-Kopf-Gebühr für Berufsschulen',
-                    'price' => 6,
-                    'price_info' => 'pro SchülerIn und Jahr',
-                    'price_class' => 3
-                ]
-            ]
+            'title' => $config['step_school_info_schooltype_label'],
+            'options' => array_filter(
+                $config['step_school_info_options'],
+                function($item) use ($option_ids) {
+                    return in_array($item['id'], $option_ids);
+                }
+            )
         ];
         $this->vars['input_student_count'] = [
-            'id' => 4,
-            'title' => 'Wieviele Schüler besuchen Ihre Schule?'
+            'id' => 100,
+            'label' => $config['step_school_info_student_count_label']
         ]; 
-
     }
 
     public function confirm(array $post_vars, array $configurator_selection) : bool

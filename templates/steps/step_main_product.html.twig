@@ -6,45 +6,80 @@
             method="post"
             action="{{ configurator.post_route }}">
             <input type="hidden" name="step_id" value="{{ configurator.step_id }}">
-            <h5>{{ configurator.title }}</h5>
+            {% include "partials/step_indicator.html.twig" %}
+            <h3>{{ configurator.title }}</h3>
             <p>{{ configurator.paragraph }}</p>
             <fieldset>
-                {{ configurator.input_hardware.title }}
                 <table class="configurator-choice-table">
-                {% for option in configurator.input_hardware.options %} 
                     <tr>
-                        <td class="input-cell">
-                            <input 
-                                type="radio" 
-                                name="main_product" 
-                                value="{{option.id}}">
-                        </td>
-                        <td class="name-cell">{{ option.name }}</td>
-                        <td class="name-price-info">{{ option.price_info }}</td>
-                        <td class="name-price">{{ option.price }} €</td>
+                        <th class="name-cell" colspan="2">{{ configurator.input_hardware.title }}</th>
+                        <th class="price-cell">Preis</th>
+                        <th class="price-info-cell" >Abrechnung</th>
                     </tr>
-                {% endfor %}
+                    {% for option in configurator.input_hardware.options %} 
+                        <tr>
+                            <td class="input-cell">
+                                <input 
+                                    type="radio" 
+                                    name="main_product" 
+                                    value="{{option.id}}">
+                            </td>
+                            <td class="name-cell">
+                                {{ option.name }}
+                                <span class="info-btn" data-target="{{ option.id }}">mehr erfahren</span>
+                            </td>
+                            <td class="price-cell">{{ option.price.value }} €</td>
+                            <td class="price-info-cell">{{ option.price.info }}</td>
+                        </tr>
+                        <tr style="display:none" id="hidden-info-{{ option.id }}" class="hidden-info-tr">
+                            <td colspan="4">
+                                {{ configurator.paragraph }}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </table>
-                {{ configurator.input_cloud.title }}
                 <table class="configurator-choice-table">
-                {% for option in configurator.input_cloud.options %} 
                     <tr>
-                        <td class="input-cell">
-                            <input 
-                                type="radio" 
-                                name="main_product" 
-                                value="{{option.id}}">
-                        </td>
-                        <td class="name-cell">{{ option.name }}</td>
-                        <td class="name-price-info">{{ option.price_info }}</td>
-                        <td class="name-price">{{ option.price }} €</td>
+                        <th class="name-cell" colspan="2">{{ configurator.input_cloud.title }}</th>
+                        <th class="price-cell">Preis</th>
+                        <th class="price-info-cell" >Abrechnung</th>
                     </tr>
-                {% endfor %}
+                    {% for option in configurator.input_cloud.options %} 
+                        <tr>
+                            <td class="input-cell">
+                                <input 
+                                    type="radio" 
+                                    name="main_product" 
+                                    value="{{option.id}}">
+                            </td>
+                            <td class="name-cell">
+                                {{ option.name }}
+                                <span class="info-btn" data-target="{{ option.id }}">mehr erfahren</span>
+                            </td>
+                            <td class="price-cell">{{ option.price.value }} €</td>
+                            <td class="price-info-cell">{{ option.price.info }}</td>
+                        </tr>
+                        <tr style="display:none" id="hidden-info-{{ option.id }}" class="hidden-info-tr">
+                            <td colspan="4">
+                                {{ configurator.paragraph }}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </table>
                 
             </fieldset>
-            <input type="submit" name="action_back" value="Zurück" />
-            <input type="submit" name="action_confirm" value="Bestätigen" />
+            <div class="configurator-btn-wrapper group">
+                <input 
+                    type="submit" 
+                    name="action_back"
+                    class="configurator-step-btn back-btn" 
+                    value="Zurück" />
+                <input 
+                    type="submit" 
+                    name="action_confirm" 
+                    class="configurator-step-btn confirm-btn" 
+                    value="Bestätigen" />
+            </div>
         </form>
     </div>
 {% endblock %}

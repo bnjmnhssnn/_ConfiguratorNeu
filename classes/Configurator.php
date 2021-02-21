@@ -30,6 +30,28 @@ class Configurator
         $vars = $current_step->getVars();
         $vars['post_route'] = $this->config['post_route'];
         $vars['selection'] = print_r($this->selection, true);
+        $vars['summary'] = [
+            'lines' => [
+                [
+                    'name' => 'Grundgebühr (jährlich)',
+                    'price' => 250
+                ],
+                [
+                    'name' => 'Einrichtungspauschale (einmalig)',
+                    'price' => 500
+                ],
+            ],
+            'totals' => [
+                [
+                    'name' => 'Kosten im ersten Jahr',
+                    'price' => 750
+                ],
+                [
+                    'name' => 'Kosten in den Folgejahren',
+                    'price' => 250
+                ],
+            ]
+        ];
         return $vars;
     }
 

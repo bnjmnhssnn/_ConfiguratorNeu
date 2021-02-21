@@ -54,9 +54,25 @@ form:
               label: Titel
               default: Schultyp & Schüleranzahl
             step_school_info_paragraph:
-              type: text
+              type: editor
               label: Text
-              default: Lorem ipsum
+              default: |
+                Bavaria ipsum dolor sit amet back mas eam du dadst ma scho daugn aasgem Zidern hallelujah sog i, 
+                luja Gschicht des is a gmahde Wiesn: Fünferl back mas Guglhupf, owe ded is gor. Etza da, 
+                hog di hi Guglhupf moand nia Charivari Broadwurschtbudn wea nia ausgähd, kummt nia hoam 
+                hawadere midananda in da greana Au. Wos so schee woaß nia need, luja. San scheans san eam es zwoa Wiesn.
+            step_school_info_schooltype_label:
+              type: text
+              label: Label für Schulform-Auswahl
+              default: Schulform wählen
+            step_school_info_option_ids:
+              type: text
+              label: Options-IDs (Kommasepariert)
+              default: 1,2,3
+            step_school_info_student_count_label:
+              type: text
+              label: Label für Schülerzahl-Eingabe
+              default: Wieviele Schüler besuchen Ihre Schule?
             step_school_info_options:
               type: editor
               validate:
@@ -96,9 +112,29 @@ form:
               label: Titel
               default: Passende IServ Lösungen für Ihre Schule
             step_main_product_paragraph:
-              type: text
+              type: editor
               label: Text
-              default: Lorem ipsum
+              default: |
+                Bavaria ipsum dolor sit amet back mas eam du dadst ma scho daugn aasgem Zidern hallelujah sog i, 
+                luja Gschicht des is a gmahde Wiesn: Fünferl back mas Guglhupf, owe ded is gor. Etza da, 
+                hog di hi Guglhupf moand nia Charivari Broadwurschtbudn wea nia ausgähd, kummt nia hoam 
+                hawadere midananda in da greana Au. Wos so schee woaß nia need, luja. San scheans san eam es zwoa Wiesn.
+            step_main_product_hardware_label:
+              type: text
+              label: Label für Hardware Auswahl
+              default: Hardware Lösungen
+            step_main_product_hardware_ids:
+              type: text
+              label: Hardware Artikel-IDs (Kommasepariert)
+              default: 4,5,6
+            step_main_product_cloud_label:
+              type: text
+              label: Label für Cloud Auswahl
+              default: Cloud Lösungen
+            step_main_product_cloud_ids:
+              type: text
+              label: Cloud Artikel-IDs (Kommasepariert)
+              default: 7,8,9
             step_main_product_options:
               type: editor
               validate:
@@ -162,9 +198,17 @@ form:
               label: Titel
               default: Passende Backup Lösungen
             step_backup_paragraph:
-              type: text
+              type: editor
               label: Text
-              default: Lorem ipsum
+              default: |
+                Bavaria ipsum dolor sit amet back mas eam du dadst ma scho daugn aasgem Zidern hallelujah sog i, 
+                luja Gschicht des is a gmahde Wiesn: Fünferl back mas Guglhupf, owe ded is gor. Etza da, 
+                hog di hi Guglhupf moand nia Charivari Broadwurschtbudn wea nia ausgähd, kummt nia hoam 
+                hawadere midananda in da greana Au. Wos so schee woaß nia need, luja. San scheans san eam es zwoa Wiesn.
+            step_backup_options_label:
+              type: text
+              label: Label für Backup Auswahl
+              default: Wählen Sie eine Backup-Lösung
             step_backup_options:
               type: editor
               validate:
@@ -175,6 +219,7 @@ form:
                   id: 10
                   name: Backup-L
                   summary_name: Backup-Hardware Backup-L
+                  on_switch: 4
                   price: 
                     value: 995
                     class: 1
@@ -183,6 +228,7 @@ form:
                   id: 11
                   name: Backup-XL
                   summary_name: Backup-Hardware Backup-XL
+                  on_switch: 5,6
                   price: 
                     value: 1395
                     class: 1
@@ -200,27 +246,25 @@ form:
                       value: 150
                       price_class: 2
                       price_info: jährlich
-                      requires:
-                        - 
-                          1
-                        - 
-                          2
+                      on_switch: 1,2
                     -
                       value: 250
                       price_class: 2
                       price_info: jährlich
-                      requires:
-                        - 
-                          3
+                      on_switch: 3
         step_4_tab:
           type: tab
           title: 4. Zusammenfassung
           fields:
-            step_backup_title:
+            step_summary_title:
               type: text
               label: Titel
               default: Zusammenfassung & Bestätigung
-            step_backup_paragraph:
-              type: text
+            step_summary_paragraph:
+              type: editor
               label: Text
-              default: Lorem ipsum
+              default: |
+                Bavaria ipsum dolor sit amet back mas eam du dadst ma scho daugn aasgem Zidern hallelujah sog i, 
+                luja Gschicht des is a gmahde Wiesn: Fünferl back mas Guglhupf, owe ded is gor. Etza da, 
+                hog di hi Guglhupf moand nia Charivari Broadwurschtbudn wea nia ausgähd, kummt nia hoam 
+                hawadere midananda in da greana Au. Wos so schee woaß nia need, luja. San scheans san eam es zwoa Wiesn.
