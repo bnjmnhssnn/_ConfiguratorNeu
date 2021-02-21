@@ -83,7 +83,9 @@ class IServConfiguratorPlugin extends Plugin
                     }
                 }
 
-            case $config['success_route']: 
+            case $config['success_route']:
+                $session = $this->grav['session'];
+                unset($session->configurator); 
                 echo 
                     "<pre>
                         Konfiguration erfolgreich beendet!\n
