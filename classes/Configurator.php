@@ -52,7 +52,7 @@ class Configurator
             return false;
         }
         $this->selection[$this->current] = $current_step->getInput();
-        if($this->current < count($this->steps)) {
+        if($this->current < (count($this->steps) - 1)) {
             $this->current++;
         } else {
             $this->ready = true;

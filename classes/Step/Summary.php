@@ -37,7 +37,7 @@ class Summary extends AbstractStep implements StepInterface
         }
         $this->user_input = [
             'email' => $post_vars['email'],
-            'name' => $post_vars['name'],
+            'contact' => $post_vars['contact'],
             'school_name' => $post_vars['school_name'],
             'free_text' => $post_vars['free_text'] ?? ''
         ];

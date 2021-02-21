@@ -81,7 +81,14 @@ class IServConfiguratorPlugin extends Plugin
                     } else {
                         throw new ConfiguratorException('Method ' . Configurator::class . '::back() returned false.');
                     }
-                }       
+                }
+
+            case $config['success_route']: 
+                echo 
+                    "<pre>
+                        Konfiguration erfolgreich beendet!\n
+                    </pre>";
+                    exit;     
         }
     }
 
