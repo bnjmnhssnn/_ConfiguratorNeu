@@ -1,4 +1,4 @@
-# I Serv Configurator Plugin
+# Configurator Plugin
 
 Kurz & knapp alle wichtigen Funktionen
 
